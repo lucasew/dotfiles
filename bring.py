@@ -11,3 +11,4 @@ def bring(path):
     os.system('cp "%s"  "%s" -r' %(origin, copyto))
 bring('/home/lucas59356/.zshrc')
 bring('/home/lucas59356/.vimrc')
+bring('/home/lucas59356/.config/nvim/init.vim')

@@ -4,17 +4,22 @@ set autoindent       " Continua o nivel de indentação da linha anterior
 syntax on
 filetype plugin on
 tab ball
+set tabstop=4 " Tabstop padrão
 
 echom "Carregando plugins..."
 
 " ---------------< Carregar plugins >---------------
 call plug#begin('~/.vim/plugged')
 " Complete plugins
+Plug 'Shougo/deoplete.nvim' " Plugin plataforma
+let g:deoplete#enable_at_startup = 1
 " -- Python3
-Plug 'davidhalter/jedi-vim', {'for': 'python'}
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'zchee/deoplete-jedi', {'for': 'python'}
 " -- Golang
 Plug 'zchee/deoplete-go', { 'do': 'make'}
+Plug 'fatih/vim-go'
+"Plug 'zchee/deoplete-go', { 'do': 'make'}
+"Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 " -- Elixir (syntax highlight
 Plug 'elixir-editors/vim-elixir', {'for': 'elixir'}
 " -> Outros utilitários
