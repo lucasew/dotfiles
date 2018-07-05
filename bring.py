@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 import os
 from pathlib import Path
 def bring(path):
@@ -12,3 +14,4 @@ def bring(path):
 bring('/home/lucas59356/.zshrc')
 bring('/home/lucas59356/.vimrc')
 bring('/home/lucas59356/.config/nvim/init.vim')
+bring('/home/lucas59356/.tmux.conf')

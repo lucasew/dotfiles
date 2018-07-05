@@ -2,6 +2,7 @@ set nu " Linhas numeradas
 set showmatch " Highlight de parenteses e chaves
 set autoindent " Mantem os niveis de indentação
 set tabstop=4 " Tab de 4 espaços
+set path+=** " Busca recursiva
 
 syntax on
 filetype plugin on
@@ -16,9 +17,13 @@ Plug 'zchee/deoplete-go' " Go
 Plug 'fatih/vim-go' " Go
 Plug 'Shougo/neco-vim' " Viml
 Plug 'elixir-editors/vim-elixir', {'for': 'elixir'} " Elixir
+Plug 'artur-shaik/vim-javacomplete2' " Java
+Plug 'Shougo/neosnippet.vim' " Engine de snippets
+Plug 'Shougo/neosnippet-snippets' " Alguns snippets para o cara ali de cima
 Plug 'Townk/vim-autoclose'
 Plug 'vim-airline/vim-airline' 
 Plug 'vim-airline/vim-airline-themes'
+Plug 'danilo-augusto/vim-afterglow' " Esquema de cores, gostei desse pra usar pelo putty
 Plug 'mattn/emmet-vim'
 
 call plug#end()
@@ -35,9 +40,10 @@ set mouse=a
 " Backup
 set backup
 
-" Airline
+" Temas e customizações
 let g:airline#extensions#tabline#enabled=1
 let g:airline_theme='minimalist'
+colorscheme afterglow
 
 " Leader == vírgula
 let mapleader = ','
