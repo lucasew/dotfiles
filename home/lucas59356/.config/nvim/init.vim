@@ -1,8 +1,16 @@
+set encoding=utf-8 " Sempre usar utf-8 ao salvar os arquivos
 set nu " Linhas numeradas
 set showmatch " Highlight de parenteses e chaves
 set autoindent " Mantem os niveis de indentação
 set tabstop=4 " Tab de 4 espaços
+set shiftwidth=4 "Evitando que o vim de identação de 8 espaços
 set path+=** " Busca recursiva
+set expandtab " Tabs viram espaços
+set list " Ilustra a identação
+set nocompatible " Desativando retrocompatibilidade com o vi
+set nobackup " Desativar backup
+set mouse=a " Ativar mouse
+
 
 syntax on
 filetype plugin on
@@ -34,11 +42,6 @@ cab W w| cab Q q| cab Wq wq| cab wQ wq| cab WQ wq
 nnoremap ; :
 
 
-" Habilitar mouse
-set mouse=a
-
-" Backup
-set backup
 
 " Temas e customizações
 let g:airline#extensions#tabline#enabled=1
@@ -51,8 +54,8 @@ let mapleader = ','
 " Movimentar pelas abas
 map <C-K> :tabnext<CR>
 map <C-J> :tabprev<CR>
-map <C-Right> :tabnext<CR>
-map <C-Left> :tabprev<CR>
+map <C-R> :tabnext<CR>
+map <C-L> :tabprev<CR>
 
 " Wildmenu: autocomplete para modo de comando
 set wildmenu
