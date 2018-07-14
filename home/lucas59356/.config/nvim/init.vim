@@ -32,6 +32,7 @@ Plug 'Townk/vim-autoclose'
 Plug 'vim-airline/vim-airline' 
 Plug 'vim-airline/vim-airline-themes'
 Plug 'danilo-augusto/vim-afterglow' " Esquema de cores, gostei desse pra usar pelo putty
+Plug 'jnurmine/Zenburn'
 Plug 'mattn/emmet-vim'
 
 call plug#end()
@@ -46,7 +47,9 @@ nnoremap ; :
 " Temas e customizações
 let g:airline#extensions#tabline#enabled=1
 let g:airline_theme='minimalist'
-colorscheme afterglow
+
+colorscheme zenburn
+" colorscheme afterglow
 
 " Leader == vírgula
 let mapleader = ','
