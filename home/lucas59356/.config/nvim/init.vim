@@ -77,9 +77,7 @@ let g:LanguageClient_serverCommands = {
             \'go': ['/home/lucas59356/go/bin/go-langserver', '-gocodecompletion'],
             \'java': ['/usr/bin/jdtls'],
             \'lua': ['/bin/lua-lsp'],
-            \'javascript.jsx': ['/home/lucas59356/.yarn/bin/js-langserver', '-stdio'],
             \}
-" https://github.com/tbodt/js-langserver
 
 
 echom "Configurando ambiente..."
