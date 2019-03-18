@@ -3,10 +3,15 @@ echom "Verificando dependências básicas..."
 " Baixar vimplug automagicamente
 function! CheckPlug(path)
     if empty(glob(a:path))
-        execute '!curl -fLo ' . a:path . ' --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+        execute '!wget -O ' . a:path . '  https://raw.github.com/junegunn/vim-plug/master/plug.vim'
     endif
 endfunction
-call CheckPlug("~/.config/nvim/autoload/plug.vim")
+
+if has("nvim")
+    call CheckPlug("~/.config/nvim/autoload/plug.vim")
+else
+    call CheckPlug("~/.vim/autoload/plug.vim")
+endif
 
 echom "Iniciando..."
 set encoding=utf-8 " Sempre usar utf-8 ao salvar os arquivos
@@ -52,19 +57,23 @@ call plug#begin()
 Plug 'Townk/vim-autoclose' " Fecha os blocos que abre
 Plug 'tomtom/tcomment_vim' " Preguiça de comentar as coisas na mão: gc {des,}comenta o selecionado, gcc {des,}comenta a linha
 Plug 'joshdick/onedark.vim' " Onedark <3
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'mattn/emmet-vim'
-Plug 'ncm2/ncm2' " Autocomplete
-Plug 'ncm2/ncm2-path' " Completa pastas e arquivos
-Plug 'ncm2/ncm2-syntax' " Completa pela definição de sintaxe
-Plug 'roxma/nvim-yarp' " Dependencia do plugin anterior
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+if has("nvim")
+    Plug 'ncm2/ncm2' " Autocomplete
+    Plug 'ncm2/ncm2-path' " Completa pastas e arquivos
+    Plug 'ncm2/ncm2-syntax' " Completa pela definição de sintaxe
+    Plug 'roxma/nvim-yarp' " Dependencia do plugin anterior
+endif
 Plug 'shougo/neco-syntax' " Dependencia
 Plug 'vim-airline/vim-airline' 
 Plug 'vim-airline/vim-airline-themes'
-Plug 'autozimu/LanguageClient-neovim', {
-            \ 'branch': 'next',
-            \ 'do': 'bash install.sh',
-            \ }
+if has("nvim")
+    Plug 'autozimu/LanguageClient-neovim', {
+                \ 'branch': 'next',
+                \ 'do': 'bash install.sh',
+                \ }
+endif
 Plug 'dart-lang/dart-vim-plugin' " Syntax Highlight dart
 Plug 'ternjs/tern_for_vim' " Javascript
 call plug#end()
@@ -82,8 +91,10 @@ let g:LanguageClient_serverCommands = {
 
 echom "Configurando ambiente..."
 
-" NCM
-autocmd BufEnter * call ncm2#enable_for_buffer() " Ativa pra galera
+if has("nvim")
+    " NCM
+    autocmd BufEnter * call ncm2#enable_for_buffer() " Ativa pra galera
+endif
 
 " Temas e customizações
 let g:airline#extensions#tabline#enabled=1
