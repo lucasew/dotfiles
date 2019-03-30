@@ -8,18 +8,45 @@ function! CheckPlug(path)
 endfunction
 call CheckPlug("~/.config/nvim/autoload/plug.vim")
 
+com! Dosify set ff=dos
+
 echom "Iniciando..."
+
+" Área de transferência
+map gy "+y
+map gp "+p
+map gd "+d
+
+" Mover pelas tabs
+map <Leader>n <esc>:tabprevious<CR>
+map <Leader>m <esc>:tabnext<CR>
+
+" Tirar highlight da última pesquisa
+noremap <C-n> :nohl<CR>
+vnoremap <C-n> :nohl<CR>
+inoremap <C-n> :nohl<CR>
+
+" Recarregar vimrc ao salvar 
+autocmd! bufwritepost init.vim source %
+autocmd! bufwritepost .vimrc source %
+
 set encoding=utf-8 " Sempre usar utf-8 ao salvar os arquivos
 set nu " Linhas numeradas
 set showmatch " Highlight de parenteses e chaves
+set path+=** " Busca recursiva
+
+" Indentação
 set autoindent " Mantem os niveis de indentação
 set tabstop=4 " Tab de 4 espaços
-set shiftwidth=4 "Evitando que o vim de identação de 8 espaços
-set path+=** " Busca recursiva
+set softtabstop=4
+set shiftwidth=4
+set shiftround
 set expandtab " Tabs viram espaços
 set list " Ilustra a identação
-set nocompatible " Desativando retrocompatibilidade com o vi
+
 set nobackup " Desativar backup
+
+set nocompatible " Desativando retrocompatibilidade com o vi
 set mouse=a " Ativar mouse
 set completeopt=menuone,noinsert,noselect,longest " Customizações no menu de autocomplete, :help completeopt para mais info
 " janela de preview que mostra algumas coisas dos comandos
@@ -30,6 +57,11 @@ set winfixheight " Mantém
 " Wildmenu: autocomplete para modo de comando
 set wildmenu
 set wildmode=list:longest,full
+
+" Wildignores
+set wildignore+=*.pyc " Python
+set wildignore+=*.o " C
+set wildignore+=*.class " Java
 
 " Menos dor de cabeça, recomendo.
 cab W w| cab Q q| cab Wq wq| cab wQ wq| cab WQ wq
@@ -67,6 +99,8 @@ Plug 'autozimu/LanguageClient-neovim', {
             \ }
 Plug 'dart-lang/dart-vim-plugin' " Syntax Highlight dart
 Plug 'ternjs/tern_for_vim' " Javascript
+" Arduino
+Plug 'stevearc/vim-arduino'
 call plug#end()
 
 let g:LanguageClient_serverCommands = {
@@ -75,12 +109,15 @@ let g:LanguageClient_serverCommands = {
             \'cpp': ['/usr/bin/ccls'],
             \'c': ['/usr/bin/ccls'],
             \'go': ['/home/lucas59356/go/bin/go-langserver', '-gocodecompletion'],
-            \'java': ['/usr/bin/jdtls'],
+            \'java': ['/usr/bin/jdtls', '-data', getcwd()],
             \'lua': ['/bin/lua-lsp'],
             \}
 
 
 echom "Configurando ambiente..."
+
+" Ler pdf no vim
+:command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> -
 
 " NCM
 autocmd BufEnter * call ncm2#enable_for_buffer() " Ativa pra galera
@@ -108,3 +145,5 @@ let dart_html_in_string=v:true
 let dart_style_guide = 2
 let dart_format_on_save = 1
 
+" Arduino
+let g:arduino_dir = '/usr/share/arduino'
