@@ -14,5 +14,7 @@ bring ~/.config/nvim/init.vim
 bring ~/.tmux.conf
 bring ~/.zshrc
 bring ~/environment
+bring ~/.config/i3/config
+bring ~/.config/polybar/config
 
 pacman -Qe > pacman-explicit.txt
