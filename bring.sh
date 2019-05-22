@@ -16,5 +16,6 @@ bring ~/.zshrc
 bring ~/environment
 bring ~/.config/i3/config
 bring ~/.config/polybar/config
+bring /usr/bin/projetor
 
 pacman -Qe > pacman-explicit.txt

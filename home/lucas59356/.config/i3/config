@@ -193,3 +193,7 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym Print exec scrot
 
 exec --no-startup-id xrandr --output eDP-1 --mode 1366x768 # desbuga resolução, tem coisa do wine em fullscreen que gosta de mudar isso
+
+exec kdeconnect-indicator
+
+exec nm-applet
