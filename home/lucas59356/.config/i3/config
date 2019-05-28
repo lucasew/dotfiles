@@ -171,7 +171,7 @@ bindsym $mod+r mode "resize"
 
 bindsym $mod+m move workspace to output left
 
-exec --no-startup-id feh ~/metro_exodus_rails-wallpaper-1366x768.jpg --bg-scale
+exec --no-startup-id feh ~/.config/i3/wall.png --bg-scale
 
 
 exec polybar example -r

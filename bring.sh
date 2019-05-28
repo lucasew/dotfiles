@@ -15,6 +15,7 @@ bring ~/.tmux.conf
 bring ~/.zshrc
 bring ~/environment
 bring ~/.config/i3/config
+bring ~/.config/i3/wall.png
 bring ~/.config/polybar/config
 bring /usr/bin/projetor
 
