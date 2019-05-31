@@ -101,3 +101,5 @@ source $ZSH/oh-my-zsh.sh
 . ~/environment
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+alias gitignore="echo $1 >> .gitignore"
