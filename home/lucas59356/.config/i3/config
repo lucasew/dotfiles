@@ -132,7 +132,10 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+bindsym $mod+Shift+r restart;
+# restarta o polybar, quando restarta o i3 geralmente o polybar dá uma bugada no tray
+# t por que é depois do r :v
+bindsym $mod+Shift+t exec polybar-msg cmd restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
@@ -187,15 +190,13 @@ bindsym XF86MonBrightnessUp exec light -A 10
 bindsym XF86MonBrightnessDown exec light -U 10
 # bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # baixa brilho
 
-bindsym XF86AudioPlay exec playerctl play
-bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioPlayPause exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 bindsym Print exec scrot
 
 exec --no-startup-id xrandr --output eDP-1 --mode 1366x768 # desbuga resolução, tem coisa do wine em fullscreen que gosta de mudar isso
-
 exec kdeconnect-indicator
 
 exec nm-applet
