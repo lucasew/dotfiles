@@ -96,20 +96,21 @@ if has("nvim")
     Plug 'ncm2/ncm2-path' " Completa pastas e arquivos
     Plug 'ncm2/ncm2-syntax' " Completa pela definição de sintaxe
     Plug 'roxma/nvim-yarp' " Dependencia do plugin anterior
+    Plug 'vim-airline/vim-airline' 
+    Plug 'vim-airline/vim-airline-themes'
 endif
 Plug 'shougo/neco-syntax' " Dependencia
-Plug 'vim-airline/vim-airline' 
-Plug 'vim-airline/vim-airline-themes'
 if has("nvim")
     Plug 'autozimu/LanguageClient-neovim', {
                 \ 'branch': 'next',
                 \ 'do': 'bash install.sh',
                 \ }
+    Plug 'dart-lang/dart-vim-plugin' " Syntax Highlight dart
+    Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g tern' }
+    " Arduino
+    Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
+    Plug 'stevearc/vim-arduino'
 endif
-Plug 'dart-lang/dart-vim-plugin' " Syntax Highlight dart
-Plug 'ternjs/tern_for_vim' " Javascript
-" Arduino
-Plug 'stevearc/vim-arduino'
 call plug#end()
 
 let g:LanguageClient_serverCommands = {
@@ -120,6 +121,8 @@ let g:LanguageClient_serverCommands = {
             \'go': ['/home/lucas59356/go/bin/go-langserver', '-gocodecompletion'],
             \'java': ['/usr/bin/jdtls', '-data', getcwd()],
             \'lua': ['/bin/lua-lsp'],
+            \'js': ['/usr/bin/javascript-typescript-stdio'],
+            \'javascript': ['/usr/bin/javascript-typescript-stdio'],
             \}
 
 
@@ -132,9 +135,6 @@ endif
 
 " Ler pdf no vim
 :command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> -
-
-" NCM
-autocmd BufEnter * call ncm2#enable_for_buffer() " Ativa pra galera
 
 " Temas e customizações
 let g:airline#extensions#tabline#enabled=1

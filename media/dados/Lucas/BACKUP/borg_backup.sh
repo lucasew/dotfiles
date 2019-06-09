@@ -11,21 +11,29 @@ snapshot)
     	--progress \
     	--list \
     	--exclude '/home/*/.cache/*' \
-    	--exclude '/var/cache/' \
-    	--exclude '/var/tmp' \
-    	--exclude '/var/log' \
-    	--exclude '/var/lib/docker' \
-    	--exclude '/var/lib/dnf' \
+    	--exclude '/home/*/.dartServer/' \
+    	--exclude '/home/*/.gradle/*' \
+    	--exclude '/home/*/.local/share/Steam' \
     	--exclude '/home/*/.mozilla' \
-        --exclude '/home/lucas59356/Downloads/' \
+    	--exclude '/home/*/.rustup/*' \
+    	--exclude '/home/*/.wine/*' \
+        --exclude '/home/*/Downloads/' \
+        --exclude '/home/*/TESTES' \
         --exclude '/home/lucas59356/.var' \
+    	--exclude '/var/cache/' \
+    	--exclude '/var/lib/dnf' \
+    	--exclude '/var/lib/docker' \
+    	--exclude '/var/log' \
+    	--exclude '/var/tmp' \
+    	--exclude '*.img' \
+    	--exclude '*.iso' \
         --exclude '*cache*' \
         --exclude '/media/dados/Lucas/BACKUP/borg' \
-        --exclude '/home/*/TESTES' \
     	borg::'{hostname}-{now}' \
     	/etc \
     	/home \
-    	/media/dados/Lucas/BACKUP/
+    	/media/dados/Lucas/BACKUP/ \
+    	/media/dados/Lucas/CÓDIGOS/
     ;;
 upload)
     rclone sync borg driveutf:/backup/BORG --stats 1s -vvvv --transfers 1  || (sleep 5; ./borg_backup.sh upload)
