@@ -215,3 +215,6 @@ exec nm-applet
 exec compton --no-fading-openclose -I 1 -O 1 -D 0
 
 for_window [class="^.*"] border pixel 0
+
+exec "setxkbmap -layout br,us"
+exec "setxkbmap -option 'grp:alt_shift_toggle'"
