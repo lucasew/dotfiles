@@ -64,6 +64,7 @@ COMPLETION_WAITING_DOTS="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  command-not-found
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -104,3 +105,5 @@ source $ZSH/oh-my-zsh.sh
 
 alias gitignore="echo $1 >> .gitignore"
 alias "cd.."="cd .."
+
+export WASMER_DIR="~/.wasm"

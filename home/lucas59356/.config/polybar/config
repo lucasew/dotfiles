@@ -54,12 +54,12 @@ module-margin-left = 1
 module-margin-right = 2
 
 font-0 = fixed:pixelsize=10;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-1 = unifont:size=6:heavy:fontformat=truetype;0
 font-2 = siji:pixelsize=10;1
 
 modules-left = bspwm i3
 modules-center = xwindow
-modules-right = xbacklight pulseaudio xkeyboard memory cpu netusage wlan eth battery temperature date powermenu
+modules-right = pulseaudio xkeyboard memory cpu netusage wlan eth battery temperature date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -295,12 +295,13 @@ label = %date% %time%
 [module/pulseaudio]
 type = internal/pulseaudio
 
-format-volume = <label-volume> <bar-volume>
+; format-volume = <label-volume> <bar-volume>
+format-volume = ♫  <bar-volume>
 ; label-volume = som %percentage%%
 label-volume =
 label-volume-foreground = ${root.foreground}
 
-label-muted = mudo
+label-muted = 
 label-muted-foreground = #666
 
 bar-volume-width = 10
@@ -314,9 +315,9 @@ bar-volume-foreground-6 = #ff5555
 bar-volume-gradient = false
 bar-volume-indicator = |
 bar-volume-indicator-font = 2
-bar-volume-fill = ─
+bar-volume-fill = _
 bar-volume-fill-font = 2
-bar-volume-empty = ─
+bar-volume-empty = _
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
 
