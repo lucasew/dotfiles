@@ -145,7 +145,9 @@ let g:airline_theme='deus'
 " let g:airline_statusline_ontop=1 " É estranho mas é legal :v
 
 colorscheme onedark
-" colorscheme afterglow
+com! Transparent hi Normal ctermbg=none
+com! White hi Normal ctermbg=white
+com! Black hi Normal ctermbg=black
 
 " Leader == vírgula
 let mapleader = ','
