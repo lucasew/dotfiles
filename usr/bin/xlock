@@ -1,0 +1,5 @@
+#! /usr/bin/env sh
+xset dpms force off
+scrot /tmp/lock.png
+ffmpeg -i /tmp/lock.png -vf "boxblur=3:1" /tmp/lock_blur.png -y
+i3lock -i /tmp/lock_blur.png -u
