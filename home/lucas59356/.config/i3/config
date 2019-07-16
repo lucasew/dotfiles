@@ -199,7 +199,7 @@ bindsym $mod+r mode "resize"
 
 bindsym $mod+m move workspace to output left
 
-exec --no-startup-id feh ~/chopper-over-chernobyl-1366×768.jpg --bg-scale
+exec --no-startup-id feh ~/.config/i3/wall.jpg --bg-scale
 
 
 exec polybar example -r
