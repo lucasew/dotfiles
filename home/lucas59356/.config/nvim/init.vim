@@ -118,9 +118,9 @@ let g:LanguageClient_serverCommands = {
             \'dart': ['/home/lucas59356/.pub-cache/bin/dart_language_server'],
             \'cpp': ['/usr/bin/ccls'],
             \'c': ['/usr/bin/ccls'],
-            \'go': ['/home/lucas59356/go/bin/go-langserver', '-gocodecompletion'],
             \'java': ['/usr/bin/jdtls', '-data', getcwd()],
             \'lua': ['/bin/lua-lsp'],
+            \'go': ['/usr/bin/gopls'],
             \'js': ['/usr/bin/javascript-typescript-stdio'],
             \'javascript': ['/usr/bin/javascript-typescript-stdio'],
             \}

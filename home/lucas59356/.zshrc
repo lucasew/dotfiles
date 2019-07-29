@@ -108,3 +108,7 @@ alias "cd.."="cd .."
 export WASMER_DIR="~/.wasm"
 alias getlinks='grep "<a href=" | sed "s/^.*<a href=//" | sed "s/>.*$//" | tr -d \"'
 alias rsstitle="grep title | sed 's/>/>\\n/g' | egrep -v '<title>' | cut -d '<' -f 1"
+export DISPLAY=:0
+alias cb=clipboard
+
+fortune brasil

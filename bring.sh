@@ -17,6 +17,7 @@ bring ~/environment
 bring ~/.config/i3/config
 bring ~/.config/i3/wall.png
 bring ~/.config/polybar/config
+bring ~/.config/betterlockscreenrc
 bring /usr/bin/projetor
 bring /usr/bin/xlock
 bring /etc/systemd/system/screenlock.service
