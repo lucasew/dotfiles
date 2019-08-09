@@ -1,16 +1,20 @@
 echom "Verificando dependências básicas..."
 
+let hostname = substitute(system('hostname'), '\n', '', '')
+let isNote = hostname == "acer-arch" " Estou rodando o script no meu note?
+
 " Baixar vimplug automagicamente
-function! CheckPlug(path)
+function! PreparaPlug(path)
     if empty(glob(a:path))
         execute '!wget -O ' . a:path . '  https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+        echom "Abra novamente e chame :PlugInstall"
     endif
 endfunction
 
 if has("nvim")
-    call CheckPlug("~/.config/nvim/autoload/plug.vim")
+    call PreparaPlug("~/.config/nvim/autoload/plug.vim")
 else
-    call CheckPlug("~/.vim/autoload/plug.vim")
+    call PreparaPlug("~/.vim/autoload/plug.vim")
 endif
 
 com! Dosify set ff=dos
@@ -28,8 +32,6 @@ map <Leader>m <esc>:tabnext<CR>
 
 " Tirar highlight da última pesquisa
 noremap <C-n> :nohl<CR>
-vnoremap <C-n> :nohl<CR>
-inoremap <C-n> :nohl<CR>
 
 " Recarregar vimrc ao salvar 
 autocmd! bufwritepost init.vim source %
@@ -53,7 +55,7 @@ set nobackup " Desativar backup
 
 set nocompatible " Desativando retrocompatibilidade com o vi
 set mouse=a " Ativar mouse
-set completeopt=menuone,noinsert,noselect,longest " Customizações no menu de autocomplete, :help completeopt para mais info
+set completeopt=menuone,noinsert,noselect " Customizações no menu de autocomplete, :help completeopt para mais info
 " janela de preview que mostra algumas coisas dos comandos
 set completeopt+=preview " Ativa
 set previewheight=3 " Altura máxima do preview
@@ -63,7 +65,7 @@ set winfixheight " Mantém
 set wildmenu
 set wildmode=list:longest,full
 
-" Wildignores
+" O wildmenu precisa ignorar quem?
 set wildignore+=*.pyc " Python
 set wildignore+=*.o " C
 set wildignore+=*.class " Java
@@ -76,31 +78,26 @@ syntax on " Ativa syntax highlight
 filetype plugin on " Plugins necessitam disso
 tab ball " Deixa menos bagunçado colocando um arquivo por aba
 
-" Navegação entre os arquivos
-nmap gt :bnext<CR>
-nmap gT :bprev<CR>
-nmap g$ :blast<CR>
-nmap g^ :bfirst<CR>
-nmap gc :bdelete<CR>
-
 echom "Carregando plugins..."
 call plug#begin()
 " Plugins aqui
-Plug 'Townk/vim-autoclose' " Fecha os blocos que abre
+Plug 'jiangmiao/auto-pairs'
 Plug 'tomtom/tcomment_vim' " Preguiça de comentar as coisas na mão: gc {des,}comenta o selecionado, gcc {des,}comenta a linha
 Plug 'joshdick/onedark.vim' " Onedark <3
 Plug 'mattn/emmet-vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-if has("nvim")
+if isNote
     Plug 'ncm2/ncm2' " Autocomplete
     Plug 'ncm2/ncm2-path' " Completa pastas e arquivos
     Plug 'ncm2/ncm2-syntax' " Completa pela definição de sintaxe
     Plug 'roxma/nvim-yarp' " Dependencia do plugin anterior
     Plug 'vim-airline/vim-airline' 
     Plug 'vim-airline/vim-airline-themes'
+    Plug 'shougo/neco-syntax' " Dependencia
 endif
-Plug 'shougo/neco-syntax' " Dependencia
-if has("nvim")
+
+
+if isNote
     Plug 'autozimu/LanguageClient-neovim', {
                 \ 'branch': 'next',
                 \ 'do': 'bash install.sh',
@@ -111,30 +108,37 @@ if has("nvim")
     Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
     Plug 'stevearc/vim-arduino'
 endif
+
+Plug 'posva/vim-vue' " Syntax highlight para vue já puxando tudo certin
+
 call plug#end()
-
-let g:LanguageClient_serverCommands = {
-            \'rust': ['/usr/bin/rls'],
-            \'dart': ['/home/lucas59356/.pub-cache/bin/dart_language_server'],
-            \'cpp': ['/usr/bin/ccls'],
-            \'c': ['/usr/bin/ccls'],
-            \'java': ['/usr/bin/jdtls', '-data', getcwd()],
-            \'lua': ['/bin/lua-lsp'],
-            \'go': ['/usr/bin/gopls'],
-            \'js': ['/usr/bin/javascript-typescript-stdio'],
-            \'javascript': ['/usr/bin/javascript-typescript-stdio'],
-            \}
-
+if isNote
+    let g:LanguageClient_serverCommands = {
+                \'rust': ['/usr/bin/rls'],
+                \'dart': ['/home/lucas59356/.pub-cache/bin/dart_language_server'],
+                \'cpp': ['/usr/bin/ccls'],
+                \'c': ['/usr/bin/ccls'],
+                \'java': ['/usr/bin/jdtls', '-data', getcwd()],
+                \'lua': ['/bin/lua-lsp'],
+                \'go': ['/usr/bin/gopls'],
+                \'js': ['/usr/bin/javascript-typescript-stdio'],
+                \'javascript': ['/usr/bin/javascript-typescript-stdio'],
+                \}
+endif
 
 echom "Configurando ambiente..."
 
-if has("nvim")
-    " NCM
-    autocmd BufEnter * call ncm2#enable_for_buffer() " Ativa pra galera
+if executable("gofmt")
+    autocmd BufWrite *.go :%!gofmt " Passa gofmt automagicamente
 endif
 
-" Ler pdf no vim
-:command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> -
+if isNote
+    " NCM
+    autocmd BufEnter * call ncm2#enable_for_buffer() " Ativa pra galera
+    " Ler pdf no vim
+    :command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> -
+endif
+
 
 " Temas e customizações
 let g:airline#extensions#tabline#enabled=1
