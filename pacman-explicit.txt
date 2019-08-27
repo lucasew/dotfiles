@@ -89,6 +89,7 @@ google-chrome 75.0.3770.100-1
 gopls-git r3443.2e34cfcb9-1
 goreturns-git 20181028.38_538ac60-1
 gparted 1.0.0-1
+gradle 5.5.1-1
 groff 1.22.4-1
 gzip 1.10-1
 haguichi 1.4.1-1
@@ -103,7 +104,7 @@ intel-media-driver 19.2.0-1
 iotop 0.6-6
 iputils 20180629.f6aac8d-4
 jabref 4.3.1-2
-jdtls 0.40.0-1
+jdtls 0.41.0-1
 jfsutils 1.1.15-6
 jq 1.6-2
 kdeconnect 1.3.4-1
@@ -115,7 +116,6 @@ libinput-gestures 2.45-1
 libmtp 1.1.16-1
 libqalculate 3.3.0-1
 libreoffice-fresh-pt-br 6.2.5-1
-libva-intel-driver 2.3.0-2
 licenses 20181104-1
 light 1.2-2
 linux 5.2.2.arch1-1
@@ -146,6 +146,7 @@ network-manager-applet 1.8.22-1
 networkmanager 1.18.2-1
 ninja 1.9.0-1
 nodejs-lts-dubnium 10.16.0-1
+notification-daemon 3.20.0-3
 noto-fonts-emoji 20180810-2
 npm 6.10.2-1
 ntfs-3g 2017.3.23-3
@@ -171,6 +172,7 @@ python-llfuse 1.3.6-1
 python-neovim 0.3.2-3
 python2-msgpack 0.5.6-1
 qalculate-gtk 3.3.0-1
+qt5ct 0.39-2
 ranger 1.9.2-1
 rclone 1.48.0-1
 refind-efi 0.11.3-1
@@ -183,8 +185,10 @@ rofi-file-browser-extended-git 1.0.2.r0.g3853da1-1
 rsync 3.1.3-1
 rustup 1.18.3-1
 s-nail 14.9.13-2
+scala 2.13.0-1
 scilab-bin 6.0.2-1
 scrcpy 1.9-1
+screenfetch 3.8.0-3
 scrot 0.9.1-1
 sed 4.7-1
 siji-git r23.c691f20-1

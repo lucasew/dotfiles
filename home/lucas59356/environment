@@ -5,6 +5,26 @@ funcion devmode() {
     eval "$(pyenv virtualenv-init -)"
     # source /usr/share/nvm/init-nvm.sh
 }
+
 export PATH=$PATH:~/go/bin
 export PATH="$PATH":"$HOME/.pub-cache/bin":"$HOME/.yarn/bin"
 export EDITOR=nvim
+
+function clean() {
+    rm -rf .ccls-cache
+    rm -rf jdt.ls-java-project
+    rm -rf .metadata
+}
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+alias gitignore="echo $1 >> .gitignore"
+alias "cd.."="cd .."
+
+export WASMER_DIR="~/.wasm"
+alias getlinks='grep "<a href=" | sed "s/^.*<a href=//" | sed "s/>.*$//" | tr -d \"'
+alias rsstitle="grep title | sed 's/>/>\\n/g' | egrep -v '<title>' | cut -d '<' -f 1"
+export DISPLAY=:0
+alias cb=clipboard
+
+fortune brasil
