@@ -60,6 +60,19 @@ set list " Ilustra a identação
 
 set nobackup " Desativar backup
 
+" Corretor: Ortográfico
+if isNote
+    function! FzfSpellSink(word)
+        exe 'normal! "_ciw'.a:word
+    endfunction
+    function! FzfSpell()
+        let suggestions = spellsuggest(expand("<cword>"))
+        return fzf#run({'source': suggestions, 'sink': function("FzfSpellSink"), 'down': 10 })
+    endfunction
+    nnoremap z= :call FzfSpell()<CR>"'
+    autocmd BufEnter *.md,*.tex,*.txt set spell spelllang=pt_br
+endif
+
 set nocompatible " Desativando retrocompatibilidade com o vi
 set mouse=a " Ativar mouse
 set completeopt=menuone,noinsert,noselect " Customizações no menu de autocomplete, :help completeopt para mais info
@@ -113,9 +126,11 @@ Plug 'posva/vim-vue' " Syntax highlight para vue já puxando tudo certin
 Plug 'cespare/vim-toml' " Syntax highlight toml
 
 " Typescript:
-Plug 'HerringtonDarkholme/yats.vim' " Syntax typescript
-" Plug 'ncm2/nvim-typescript', {'do': './install.sh'}
-Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+if isNote
+    Plug 'HerringtonDarkholme/yats.vim' " Syntax typescript
+    " Plug 'ncm2/nvim-typescript', {'do': './install.sh'}
+    Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+endif
 
 " Denite:
 if isNote
@@ -169,7 +184,7 @@ endif
 " if executable('typescript-language-server')
 "     let g:LanguageClient_serverCommands.typescript = [exepath('typescript-language-server'), '--stdio']
 " endif
-"
+
 if executable('ccls')
     let g:LanguageClient_serverCommands.c = [exepath('ccls')]
     let g:LanguageClient_serverCommands.cpp = [exepath('ccls')]
@@ -195,7 +210,7 @@ endif
 "     let g:LanguageClient_serverCommands.javascript = [exepath('javascript-typescript-stdio')]
 " endif
 
-if has('nvim')
+if has('nvim') && executable('npm')
     Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
 endif
 
@@ -216,13 +231,26 @@ endif
 
 
 " Arduino:
-if has('arduino')
+if executable('arduino')
+    function! ArduinoStatusLine()
+        let port = arduino#GetPort()
+        let line = '%f [' . g:arduino_board . '] [' . g:arduino_programmer . ']'
+        if !empty(port)
+            let line = line . ' (' . port . ':' . g:arduino_serial_baud . ')'
+        endif
+        return line
+    endfunction
     Plug 'stevearc/vim-arduino'
     let g:arduino_dir = '/usr/share/arduino'
+    autocmd BufNewFile,BufRead *.ino let g:airline_section_x='%{ArduinoStatusLine()}'
 endif
 
 if executable("gofmt")
     " autocmd BufWrite *.go :%!gofmt " Passa gofmt automagicamente
+endif
+
+if executable("nasm")
+    autocmd BufNewFile,BufRead *.asm set filetype=nasm
 endif
 
 if executable('pdftotext')
@@ -244,7 +272,7 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#tabline#virtualenv=1
 let g:airline_powerline_fonts = 1 " Aqui desbugou um símbolo
 let g:airline_theme='minimalist'
-let g:airline_statusline_ontop=1 " É estranho mas é legal :v
+" let g:airline_statusline_ontop=1 " É estranho mas é legal :v
 
 " Colorscheme:
 Plug 'joshdick/onedark.vim' " Onedark <3
