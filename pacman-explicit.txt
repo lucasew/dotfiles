@@ -14,11 +14,13 @@ android-sdk-build-tools-23 r23-1
 android-sdk-build-tools-28 r28-1
 android-sdk-platform-tools 29.0.1-1
 android-udev 20190315-1
-arduino 1:1.8.9-3
+appimage-git r1595.fef038a-1
+arduino 1:1.8.9-1
 arduino-avr-core 1.6.23-1
 aria2 1.34.0-3
 asciinema 2.0.2-2
 atomicparsley 0.9.6-1
+audacity 1:2.3.2-2
 autoconf 2.69-5
 automake 1.16.1-1
 batmon-git r5.2b8ae64-1
@@ -45,6 +47,7 @@ dmenu 4.9-1
 dos2unix 7.4.0-1
 dosbox 0.74.3-1
 dunst 1.4.1-1
+dzen2 0.9.5.14.488ab66-1
 earlyoom 1.3-1
 emscripten 1.38.41-1
 evince 3.32.0+26+gd3aecce7-2
@@ -57,6 +60,7 @@ firefox 68.0.2-1
 flex 2.6.4-2
 flite1 1.4-2
 flutter 1.7.8.hotfix.3-1
+foremost 1.5.7-4
 fortune-mod 2.10.0-1
 fortune-mod-br 20080530-1
 fpc 3.0.4-6
@@ -108,7 +112,9 @@ jabref 4.3.1-2
 jdtls 0.41.0-1
 jfsutils 1.1.15-6
 jq 1.6-2
-kdeconnect 1.3.5-2
+kdeconnect 1.3.5-3
+kdenlive 19.08.1-1
+keybase 4.4.0-1
 lazarus-gtk2 2.0.4-1
 lf 13-1
 lib32-freetype2 2.10.1-1
@@ -125,6 +131,7 @@ lld 8.0.1-1
 logmein-hamachi 2.1.0.198-1
 logrotate 3.15.0-1
 lvm2 2.02.185-1
+lxqt-policykit 0.14.1-1
 m4 1.4.18-2
 make 4.2.1-3
 man-db 2.8.6.1-1
@@ -148,6 +155,7 @@ networkmanager 1.20.0-1
 ninja 1.9.0-1
 nodejs-lts-dubnium 10.16.3-1
 notification-daemon 3.20.0-3
+notion-app 1.0.8-1
 noto-fonts-emoji 20180810-2
 npm 6.11.2-1
 ntfs-3g 2017.3.23-3
@@ -155,8 +163,10 @@ openscad 2019.05-1
 openssh 8.0p1-2
 p7zip 16.02-5
 pacman 5.1.3-1
+pandoc 2.7.3-43
 paper-icon-theme 1.5.0-2
 patch 2.7.6-7
+pinger-indicator-git r1.339b045-1
 pkgconf 1.6.3-1
 pkgfile 19-1
 playerctl 2.0.2-2
@@ -173,7 +183,7 @@ python-llfuse 1.3.6-1
 python-neovim 0.3.2-3
 python2-msgpack 0.5.6-1
 qalculate-gtk 3.3.0-1
-qt5ct 0.39-2
+qt5ct 0.41-1
 ranger 1.9.2-1
 rclone 1.48.0-2
 refind-efi 0.11.3-1
@@ -195,6 +205,7 @@ scrot 1.1.1-1
 sed 4.7-1
 siji-git r23.c691f20-1
 spotify 1:1.1.5.153-1
+squashfs-tools 4.4-1
 steam 1.0.0.61-3
 strace 5.2-1
 sudo 1.8.27-1
@@ -205,6 +216,7 @@ texinfo 6.6-1
 texlive-bin 2019.51075-3
 texlive-core 2019.50917-1
 texlive-latexextra 2019.50920-1
+texlive-pictures 2019.50872-1
 texlive-science 2019.50760-1
 tixati 2.61-1
 tk 8.6.9.1-2

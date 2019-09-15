@@ -69,7 +69,7 @@ if isNote
         let suggestions = spellsuggest(expand("<cword>"))
         return fzf#run({'source': suggestions, 'sink': function("FzfSpellSink"), 'down': 10 })
     endfunction
-    nnoremap z= :call FzfSpell()<CR>"'
+    nnoremap <tab> :call FzfSpell()<CR>
     autocmd BufEnter *.md,*.tex,*.txt set spell spelllang=pt_br
 endif
 
@@ -103,6 +103,13 @@ Plug 'jiangmiao/auto-pairs' " Fecha os blocos que abre, fica parecido com o esqu
 Plug 'tpope/vim-surround' " Mexe com coisas em volta, tipo parenteses
 Plug 'tomtom/tcomment_vim' " Preguiça de comentar as coisas na mão: gc {des,}comenta o selecionado, gcc {des,}comenta a linha
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+" Snippets:
+Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-n>"
+let g:UltiSnipsJumpBackwardTrigger="<c-p>"
 
 if has('nvim')
     Plug 'ncm2/ncm2' " Autocomplete
@@ -309,4 +316,6 @@ if has('nvim')
     " let g:echodoc#type = "virtual"
 endif
 
+
 call plug#end()
+

@@ -21,8 +21,8 @@ ping_host = google.com
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #55000000
-background-alt = #88FFFFFF
+background = #aa111111
+background-alt = #aa111111
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
 foreground-alt = #555
@@ -37,8 +37,8 @@ width = 100%
 height = 20
 ;offset-x = 1%
 ;offset-y = 1%
-radius = 0.0
-fixed-center = false
+radius = 0
+fixed-center = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -55,13 +55,16 @@ padding-right = 0
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = Noto:pixelsize=10;1
-font-1 = unifont:size=6:heavy:fontformat=truetype;0
-font-2 = siji:pixelsize=10;1
+; font-0 = Noto:pixelsize=10;1
+; font-1 = unifont:size=6:heavy:fontformat=truetype;0
+; font-2 = siji:pixelsize=10;1
+
+font-0 = pango:Roboto, Light 7
+font-1 = siji:pixelsize=10
 
 modules-left = bspwm i3
-modules-center = xwindow
-modules-right = pulseaudio xkeyboard memory cpu netusage net_test wlan eth battery temperature date powermenu
+modules-center = 
+modules-right = pulseaudio xkeyboard memory cpu netusage wlan eth temperature battery date 
 
 tray-position = right
 tray-padding = 2

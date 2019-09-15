@@ -13,7 +13,8 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
+# font pango:monospace 8
+font pango:Roboto, Light 12
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -199,7 +200,7 @@ bindsym $mod+r mode "resize"
 
 bindsym $mod+m move workspace to output left
 
-exec --no-startup-id feh ~/.config/i3/wall.jpg --bg-scale
+exec --no-startup-id feh ~/.config/i3/wall.jpg --bg-max
 
 
 exec polybar example -r
@@ -222,13 +223,13 @@ bindsym Print exec scrot
 
 exec_always xrandr --output eDP-1 --mode 1366x768 # desbuga resolução, tem coisa do wine em fullscreen que gosta de mudar isso
 
-exec kdeconnect-indicator
+exec "QT_QPA_PLATFORMTHEME=  kdeconnect-indicator"
 exec nm-applet
 exec blueman-applet
 
 exec compton --no-fading-openclose -I 1 -O 1 -D 0
 
-for_window [class="^.*"] border pixel 0
+# for_window [class="^.*"] border pixel 0
 
 exec "setxkbmap -layout br,us"
 exec "setxkbmap -option 'grp:alt_shift_toggle'"
@@ -238,6 +239,20 @@ exec ulauncher
 exec xautolock -locker 'xlock'
 bindsym $mod+Control+l exec xautolock -locknow
 
-gaps outer 10
-gaps inner 10
-smart_gaps on
+exec /usr/bin/pinger-indicator
+
+exec /usr/bin/lxqt-policykit-agent
+
+# gaps outer 10
+# gaps inner 10
+# smart_gaps on
+
+# class                 border  backgr.     text    indicator child_border
+client.focused          #222222aa #000000aa #ffffff #2e9ef4   #000000
+client.focused_inactive #000000   #5f676a   #ffffff #484e50   #000000
+client.unfocused        #242424aa #242424aa #ffffff #292d2e   #000000
+client.urgent           #2f343a   #900000   #ffffff #900000   #900000
+client.placeholder      #000000   #0c0c0c   #ffffff #000000   #0c0c0c
+
+client.background       #000000
+
