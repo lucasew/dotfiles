@@ -11,8 +11,10 @@ snapshot)
     	--progress \
     	--list \
     	--exclude '/home/*/.cache/*' \
+    	--exclude '/home/*/.config/nvim/plugged' \
     	--exclude '/home/*/.dartServer/' \
     	--exclude '/home/*/.gradle/*' \
+    	--exclude '/home/*/.node-gyp/*' \
     	--exclude '/home/*/.local/share/Steam' \
     	--exclude '/home/*/.mozilla' \
     	--exclude '/home/*/.rustup/*' \
@@ -28,6 +30,8 @@ snapshot)
     	--exclude '*.img' \
     	--exclude '*.iso' \
         --exclude '*cache*' \
+        --exclude '*Cache*' \
+        --exclude '*node_modules*' \
         --exclude '/media/dados/Lucas/BACKUP/borg' \
     	borg::'{hostname}-{now}' \
     	/etc \

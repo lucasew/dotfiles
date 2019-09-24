@@ -90,15 +90,14 @@ set wildignore+=*.pyc " Python
 set wildignore+=*.o " C
 set wildignore+=*.class " Java
 
-" Menos dor de cabeça, recomendo.
-cab W w| cab Q q| cab Wq wq| cab wQ wq| cab WQ wq
-nnoremap ; :
-
 syntax on " Ativa syntax highlight
 filetype plugin on " Plugins necessitam disso
 tab ball " Deixa menos bagunçado colocando um arquivo por aba
 
 call plug#begin()
+" Menos dor de cabeça, recomendo.
+Plug 'lucasew/nocapsquit.vim'
+
 Plug 'jiangmiao/auto-pairs' " Fecha os blocos que abre, fica parecido com o esquema do vs code
 Plug 'tpope/vim-surround' " Mexe com coisas em volta, tipo parenteses
 Plug 'tomtom/tcomment_vim' " Preguiça de comentar as coisas na mão: gc {des,}comenta o selecionado, gcc {des,}comenta a linha
@@ -290,7 +289,7 @@ com! Transparent hi Normal ctermbg=none
 com! White hi Normal ctermbg=white
 com! Black hi Normal ctermbg=black
 
-" Leader == vírgula
+" Leader == espaço
 let mapleader = ','
 
 " Emmet: macro para html
@@ -316,6 +315,12 @@ if has('nvim')
     " let g:echodoc#type = "virtual"
 endif
 
+" Startify:
+Plug 'mhinz/vim-startify'
+if executable("fortune")
+  let g:startify_custom_header =
+              \ map(split(system('fortune brasil'), '\n'), '"   ". v:val')
+endif
 
 call plug#end()
 

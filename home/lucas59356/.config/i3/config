@@ -42,6 +42,9 @@ bindsym $mod+Shift+q kill
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d exec --no-startup-id rofi -show combi
+
+bindsym $mod+c exec --no-startup-id rofi -show calc
 
 # change focus
 bindsym $mod+j focus left
@@ -203,7 +206,7 @@ bindsym $mod+m move workspace to output left
 exec --no-startup-id feh ~/.config/i3/wall.jpg --bg-max
 
 
-exec polybar example -r
+exec polybar i3 -r
 # exec gnome-screensaver
 bindsym Control+Mod1+l exec gnome-screensaver-command -l
 
@@ -234,7 +237,7 @@ exec compton --no-fading-openclose -I 1 -O 1 -D 0
 exec "setxkbmap -layout br,us"
 exec "setxkbmap -option 'grp:alt_shift_toggle'"
 
-exec ulauncher
+# exec ulauncher
 
 exec xautolock -locker 'xlock'
 bindsym $mod+Control+l exec xautolock -locknow
@@ -242,6 +245,8 @@ bindsym $mod+Control+l exec xautolock -locknow
 exec /usr/bin/pinger-indicator
 
 exec /usr/bin/lxqt-policykit-agent
+
+exec xfsettingsd
 
 # gaps outer 10
 # gaps inner 10
@@ -255,4 +260,3 @@ client.urgent           #2f343a   #900000   #ffffff #900000   #900000
 client.placeholder      #000000   #0c0c0c   #ffffff #000000   #0c0c0c
 
 client.background       #000000
-
