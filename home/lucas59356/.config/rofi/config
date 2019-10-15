@@ -1,4 +1,7 @@
 rofi.combi-modi: window,drun,keys
 rofi.font: hack 10
 rofi.modi: combi
-rofi.theme: Pop-Dark
+rofi.theme: my
+
+
+

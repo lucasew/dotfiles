@@ -1,8 +1,16 @@
 let hostname = substitute(system('hostname'), '\n', '', '')
 let isNote = hostname == "acer-arch" " Estou rodando o script no meu note?
+let useClangd = 1
 
 " Inicializar map dos langservers
 let g:LanguageClient_serverCommands = {}
+
+" Inicializar configurações do lightline
+let g:lightline = {}
+let g:lightline.active = {}
+let g:lightline.active.left = [ ['mode', 'paste'], ['readonly', 'filename', 'modified'] ]
+let g:lightline.component = {}
+
 
 " Baixar vimplug automagicamente
 function! PreparaPlug(path)
@@ -98,10 +106,10 @@ call plug#begin()
 " Menos dor de cabeça, recomendo.
 Plug 'lucasew/nocapsquit.vim'
 
-Plug 'jiangmiao/auto-pairs' " Fecha os blocos que abre, fica parecido com o esquema do vs code
+" Plug 'jiangmiao/auto-pairs' " Fecha os blocos que abre, fica parecido com o esquema do vs code
 Plug 'tpope/vim-surround' " Mexe com coisas em volta, tipo parenteses
 Plug 'tomtom/tcomment_vim' " Preguiça de comentar as coisas na mão: gc {des,}comenta o selecionado, gcc {des,}comenta a linha
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', {'do': './install --all' }
 
 " Snippets:
 Plug 'honza/vim-snippets'
@@ -135,12 +143,20 @@ Plug 'cespare/vim-toml' " Syntax highlight toml
 if isNote
     Plug 'HerringtonDarkholme/yats.vim' " Syntax typescript
     " Plug 'ncm2/nvim-typescript', {'do': './install.sh'}
-    Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+    " Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+endif
+
+" CtrlP
+if isNote
+    Plug 'ctrlpvim/ctrlp.vim'
 endif
 
 " Denite:
-if isNote
+if 0
     Plug 'Shougo/denite.nvim'
+    autocmd VimEnter call denite#custom#option('default', 'split', 'floating') " Janela flutuante do neovim
+    autocmd VimEnter call denite#custom#option('default', 'prompt', 'λ:') " Prompt diferenciado
+
     autocmd FileType denite call s:denite_conf()
     function! s:denite_conf() abort
         nnoremap <silent><buffer><expr> <CR>
@@ -157,6 +173,7 @@ if isNote
                     \ denite#do_map('toggle_select').'j'
     endfunction
 endif
+
 
 " VimScript:
 Plug 'ncm2/ncm2-vim'
@@ -190,19 +207,29 @@ endif
 " if executable('typescript-language-server')
 "     let g:LanguageClient_serverCommands.typescript = [exepath('typescript-language-server'), '--stdio']
 " endif
+if useClangd
+    if executable('clangd')
+        let g:LanguageClient_serverCommands.c = [exepath('clangd')]
+        let g:LanguageClient_serverCommands.cpp = [exepath('clangd')]
+    endif
+else
+    if executable('ccls')
+        let g:LanguageClient_serverCommands.c = [exepath('ccls')]
+        let g:LanguageClient_serverCommands.cpp = [exepath('ccls')]
+    endif
+endif
 
-if executable('ccls')
-    let g:LanguageClient_serverCommands.c = [exepath('ccls')]
-    let g:LanguageClient_serverCommands.cpp = [exepath('ccls')]
+if executable('pyls')
+    let g:LanguageClient_serverCommands.python = [exepath('pyls')]
 endif
 
 if executable('gopls')
     let g:LanguageClient_serverCommands.go = [exepath('gopls')]
 endif
 
-" if executable('jdtls')
-"     let g:LanguageClient_serverCommands.java = [exepath('jdtls'), '-data', getcwd()]
-" endif
+if executable('jdtls')
+    let g:LanguageClient_serverCommands.java = [exepath('jdtls'), '-data', getcwd()]
+endif
 
 if executable('lua-lsp')
     let g:LanguageClient_serverCommands.lua = [exepath('lua-lsp')]
@@ -212,9 +239,9 @@ if executable('rls')
     let g:LanguageClient_serverCommands.rust = [exepath('rls')]
 endif
 
-" if executable('javascript-typescript-stdio')
-"     let g:LanguageClient_serverCommands.javascript = [exepath('javascript-typescript-stdio')]
-" endif
+if executable('javascript-typescript-stdio')
+    let g:LanguageClient_serverCommands.javascript = [exepath('javascript-typescript-stdio')]
+endif
 
 if has('nvim') && executable('npm')
     Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
@@ -230,7 +257,7 @@ if executable('dart_language_server')
 endif
 
 " Java:
-if has('nvim')
+if has('nvim') && 0
     Plug 'ObserverOfTime/ncm2-jc2', {'for': ['java', 'jsp']}
     Plug 'artur-shaik/vim-javacomplete2', {'for': ['java', 'jsp']}
 endif
@@ -240,15 +267,16 @@ endif
 if executable('arduino')
     function! ArduinoStatusLine()
         let port = arduino#GetPort()
-        let line = '%f [' . g:arduino_board . '] [' . g:arduino_programmer . ']'
+        let line = '[' . g:arduino_board . ']'
         if !empty(port)
-            let line = line . ' (' . port . ':' . g:arduino_serial_baud . ')'
+            line = line . ' (' . port . ':' . g:arduino_serial_baud . ')'
         endif
         return line
     endfunction
     Plug 'stevearc/vim-arduino'
     let g:arduino_dir = '/usr/share/arduino'
-    autocmd BufNewFile,BufRead *.ino let g:airline_section_x='%{ArduinoStatusLine()}'
+    let g:lightline.component.arduino = '%{ArduinoStatusLine()}'
+    autocmd BufNewFile,BufRead *.ino call add(g:lightline.active.left[1], 'arduino')
 endif
 
 if executable("gofmt")
@@ -270,15 +298,8 @@ if has('nvim')
     nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 endif
 
-" Temas e customizações
-Plug 'vim-airline/vim-airline' 
-Plug 'vim-airline/vim-airline-themes'
-let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline#extensions#tabline#virtualenv=1
-let g:airline_powerline_fonts = 1 " Aqui desbugou um símbolo
-let g:airline_theme='minimalist'
-" let g:airline_statusline_ontop=1 " É estranho mas é legal :v
+Plug 'itchyny/lightline.vim'
+let g:lightline.colorscheme = 'wombat'
 
 " Colorscheme:
 Plug 'joshdick/onedark.vim' " Onedark <3
@@ -304,6 +325,7 @@ autocmd VimEnter * call neomake#configure#automake('w')
 " Syntastic:
 if has('nvim')
     Plug 'vim-syntastic/syntastic'
+    autocmd VimEnter set g:airline_section_y += %#warningmsg#
 endif
 
 " Echodoc: 
@@ -312,7 +334,7 @@ if has('nvim')
     let g:echodoc#enable_at_startup=1
     " set cmdheight=2
     set noshowmode
-    " let g:echodoc#type = "virtual"
+    let g:echodoc#type = "virtual"
 endif
 
 " Startify:
@@ -322,5 +344,17 @@ if executable("fortune")
               \ map(split(system('fortune brasil'), '\n'), '"   ". v:val')
 endif
 
-call plug#end()
+" Man:
+Plug 'bruno-/vim-man'
 
+" LanguageTool:
+Plug 'vim-scripts/LanguageTool'
+let g:languagetool_jar='/usr/share/java/languagetool/'
+
+" IndentLines:
+Plug 'Yggdroot/indentLine'
+
+" Polyglot: Pacotão de sintaxe e tudo mais
+Plug 'sheerun/vim-polyglot'
+
+call plug#end()

@@ -100,3 +100,5 @@ source $ZSH/oh-my-zsh.sh
 # Carrega as configuracoes de ambiente comuns aos shells
 . ~/environment
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

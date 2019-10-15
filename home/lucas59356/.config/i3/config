@@ -203,9 +203,6 @@ bindsym $mod+r mode "resize"
 
 bindsym $mod+m move workspace to output left
 
-exec --no-startup-id feh ~/.config/i3/wall.jpg --bg-max
-
-
 exec polybar i3 -r
 # exec gnome-screensaver
 bindsym Control+Mod1+l exec gnome-screensaver-command -l
@@ -226,7 +223,7 @@ bindsym Print exec scrot
 
 exec_always xrandr --output eDP-1 --mode 1366x768 # desbuga resolução, tem coisa do wine em fullscreen que gosta de mudar isso
 
-exec "QT_QPA_PLATFORMTHEME=  kdeconnect-indicator"
+exec "QT_QPA_PLATFORMTHEME=''  kdeconnect-indicator"
 exec nm-applet
 exec blueman-applet
 
@@ -248,9 +245,15 @@ exec /usr/bin/lxqt-policykit-agent
 
 exec xfsettingsd
 
+exec pasystray
+
+exec ~/.fehbg
+
 # gaps outer 10
 # gaps inner 10
 # smart_gaps on
+
+new_window 1pixel
 
 # class                 border  backgr.     text    indicator child_border
 client.focused          #222222aa #000000aa #ffffff #2e9ef4   #000000

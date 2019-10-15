@@ -1,8 +1,3 @@
 #! /usr/bin/env sh
 xset dpms force off
-LOCK_BLUR=/tmp/lock_blur.png
-LOCK_IMG=/home/lucas59356/.config/i3/overgrown-aperture-1366×768.png
-# scrot /tmp/lock.png
-# ffmpeg -i /home/lucas59356/.config/i3/wall.png -vf "boxblur=3:1" /tmp/lock_blur.png -y
-#i3lock -i $LOCK_IMG -tue
-betterlockscreen -l blur dim -t "Lucas Eduardo Wendt" &
+betterlockscreen -l -t "$(whoami)" &
