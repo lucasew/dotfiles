@@ -1,6 +1,6 @@
-~/.sbclrc
-~/.emacs
-~/.config/nvim/init.vim
 ~/.emacs.d/init.el
 ~/.clisprc.lisp
 ~/.abclrc
+~/.sbclrc
+~/.emacs
+~/.config/nvim/init.vim
