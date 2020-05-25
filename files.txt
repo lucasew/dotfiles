@@ -1,6 +1,12 @@
 ~/.emacs.d/init.el
-~/.clisprc.lisp
-~/.abclrc
-~/.sbclrc
-~/.emacs
+/autorun.inf
 ~/.config/nvim/init.vim
+/PortableApps/PROGRAMAS/1LINK
+/ICONE.ico
+~/.emacs
+~/.clisprc.lisp
+/hell.cmd
+/hellexec.ahk
+~/.abclrc
+/backup.cmd
+~/.sbclrc
