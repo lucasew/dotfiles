@@ -1,15 +1,18 @@
-﻿(defun set-current-status (status)
-  (if status (defvar *current-status* status))
-  (message "%s..." *current-status*))
-
-;; comando para abrir este arquivo de dotfile
+﻿;; comando para abrir este arquivo de dotfile
 (defun dotfile ()
   "Opens the dotfile for editing"
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
+(defun linux-p ()
+  (eq system-type "gnu/linux"))
 
-(set-current-status "Inicializando")
+;; ido-mode
+(require 'ido)
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
+
 (setq inhibit-startup-message t)
 (tool-bar-mode -1) ;; tira toolbar
 (menu-bar-mode -1) ;; tira barra de menu
@@ -21,31 +24,35 @@
 (electric-pair-mode 1) ;; autoclose dos bgl
 (setq make-backup-files nil) ;; desativa aqueles arquivos que comecam com ~
 (setq auto-save-default nil) ;; desativa aqueles #arquivos#
+(setq straight-repository-branch "master") ;; branch straight.el
+;;(setq straight-check-for-modifications t) ;; jeito diferenciado do straight puxar as modificações só que pode ser mais lento
+(setq straight-use-package-by-default t) ;; use-package usando straight
+(when (linux-p)
+    (setq straight-vc-git-default-protocol "ssh"))
 
-(set-current-status "Configurando coisas básicas como o gerenciador de pacotes")
-;; melpa
-(require 'package)
-(package-initialize)
-(add-to-list 'package-archives
-	     '("melpa" . "http://melpa.org/packages/")
-	     t)
-(add-to-list 'package-archives
-	     '("org" . "https://orgmode.org/elpa/")
-	     t)
+;; bootstrap straight.el
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+	(url-retrieve-synchronously
+	 "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+	 'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
-;; bootstrap use-package
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+;; instala o use-package pelo straight.el
+(straight-use-package 'use-package)
 
 ;; tema
-(message "Configurando tema...")
 (use-package atom-one-dark-theme
   :ensure t
   :config
   (load-theme 'atom-one-dark t))
 
-(set-current-status "Configurando outros plugins")
 ;; undo-tree
 (use-package undo-tree 
   :ensure t
@@ -117,41 +124,8 @@
   :ensure t
   :after yasnippet)
 
-;; configurar evil mode se ativado
-(set-current-status "Evil-mode") 
-(use-package evil 
-  :ensure t
-  :init
-  (setq evil-want-keybinding nil)
-  :config
-  (evil-mode 1))
-
-(use-package evil-commentary 
-  :ensure t
-  :after evil
-  :config
-  (evil-commentary-mode))
-
-(use-package evil-collection 
-  :ensure t
-  :after evil
-  :config
-  (evil-collection-init))
-
-(set-current-status "Configurando org-mode")
 (use-package org
   :ensure t)
-
-(use-package evil-org
-  :ensure t
-  :after (org evil)
-  :config
-  (add-hook 'org-mode-hook 'evil-org-mode)
-  (add-hook 'evil-org-mode-hook
-	    (lambda ()
-	      (evil-org-set-key-theme)))
-  (require 'evil-org-agenda)
-  (evil-org-agenda-set-keys))
 
 ;; smex: M-x melhorado
 (use-package smex 
@@ -164,7 +138,6 @@
   (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
   )
 
-(set-current-status "Configurando dashboard")
 (use-package all-the-icons
   :ensure t
   :init
@@ -180,7 +153,13 @@
 (use-package dired-toggle
   :ensure t
   :bind (
-	 ("<f3>" . #'dired-toggle))
+	 ("<f3>" . #'dired-toggle)
+	 :map dired-mode-map
+	 ("q" . #'dired-toggle-quit)
+	 ([remap dired-find-file] . #'dired-toggle-find-file)
+	 ([remap dired-up-directory] . #'dired-toggle-up-directory)
+	 ("C-c C-u" . #'dired-toggle-up-directory)
+	 )
   :config
   (setq dired-toggle-window-size 32)
   (setq dired-toggle-window-side 'left))
@@ -189,6 +168,7 @@
   :ensure t
   :after all-the-icons
   :config
+  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
   (setq dashboard-startup-banner 'logo)
   (setq dashboard-center-content t)
   (setq dashboard-show-shortcuts nil)
@@ -199,4 +179,3 @@
 (use-package fzf
   :ensure t)
 
-(set-current-status "Pronto")
