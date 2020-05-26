@@ -138,6 +138,18 @@
   (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
   )
 
+(use-package company-emoji
+  :ensure t
+  :after company
+  :config
+  (add-to-list 'company-backends 'company-emoji))
+
+(use-package emojify
+  :ensure t
+  :config
+  (add-hook 'after-init-hook #'global-emojify-mode)
+  (setq emojify-company-tooltips-p t))
+
 (use-package all-the-icons
   :ensure t
   :init
