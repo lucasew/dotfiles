@@ -154,6 +154,7 @@ set "RUSTUP_HOME=%PREFIX%DADOS\Lucas\scoop\persist\rustup\.rustup"
 popd
 
 set CMDLINE=%*
+
 rem Pega o texto retornado pela fatia do cmdline, que se vazio passa direto
 set "expr=%CMDLINE:~0,1%"
 

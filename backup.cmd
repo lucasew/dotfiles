@@ -1,4 +1,3 @@
-@rem
 @echo off
 pushd %~dp0
 
@@ -15,8 +14,9 @@ hell.cmd restic backup -vvvv -H hd --cleanup-cache ^
 -e elpa ^
 -e .log ^
 -e .jar ^
-%PREFIX%*.cmd ^
-%PREFIX%*.ahk ^
+%PREFIX%backup.cmd ^
+%PREFIX%hell.cmd ^
+%PREFIX%hellexec.ahk ^
 %PREFIX%DADOS\Lucas\.emacs.d\init.el ^
 %PREFIX%DADOS\Lucas\.config ^
 %PREFIX%DADOS\Lucas\IdeaProjects ^
@@ -27,8 +27,9 @@ hell.cmd restic backup -vvvv -H hd --cleanup-cache ^
 %PREFIX%DADOS\Lucas\AppData\Roaming\SmartSteamEmu ^
 %PREFIX%DADOS\Lucas\CODIGOS ^
 %PREFIX%DADOS\Lucas\Documents ^
+"%PREFIX%\DADOS\Lucas\AppData\Roaming\Goldberg SocialClub Emu Saves" ^
 %BINDIR%\1LINK ^
 %TMP%\bin.txt ^
-%TMP%\jogos.txt ^
+%TMP%\jogos.txt
 
 popd
