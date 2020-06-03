@@ -2,3 +2,4 @@
 /home/lucasew/.environment
 /home/lucasew/.zshrc
 /home/lucasew/.bashrc
+/home/lucasew/.tmux.conf
