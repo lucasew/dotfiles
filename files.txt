@@ -1,0 +1,4 @@
+/home/lucasew/.emacs.d/init.el
+/home/lucasew/.environment
+/home/lucasew/.zshrc
+/home/lucasew/.bashrc

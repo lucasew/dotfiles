@@ -1,0 +1,56 @@
+devmode() {
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+    # source /usr/share/nvm/init-nvm.sh
+}
+
+dgoget() {
+    docker run -v $(pwd):/go/bin -it golang go get -v $*
+}
+
+export RESTIC_REPOSITORY=rclone:drive:/BACKUPS/restic
+export RESTIC_CACHE_DIR=/tmp
+
+alias cls=clear
+
+backup () {
+    restic backup -vvvv -H note-linux --cleanup-cache \
+        ~/.bashrc \
+        ~/.config \
+        ~/.emacs.d/init.el \
+        ~/.environment \
+        ~/.ssh \
+        ~/.tmux.conf \
+        ~/.zshrc \
+        ~/WORKSPACE \
+        -e='**/*.log' \
+        -e='**/.cache' \
+        -e='**/.ccls-cache' \
+        -e='**/dist' \
+        -e='**/node_modules' \
+        -e='~/.config/BraveSoftware/**'
+}
+
+export PS1="\[\e[34;40m\]\u\[\e[m\]\[\e[40m\]@\[\e[m\]\[\e[32;40m\]\h\[\e[m\]\[\e[40m\] \[\e[m\]\[\e[31;40m\]\w\[\e[m\]\[\e[40m\] \[\e[m\]\[\e[33;40m\]\\$\[\e[m\] "
+export PATH=$PATH:~/go/bin:~/.local/bin:~/.yarn/bin;~/.pub-cache/bin 2> /dev/null
+export EDITOR=nvim
+
+clean() {
+    rm -rf .ccls-cache
+    rm -rf jdt.ls-java-project
+    rm -rf .metadata
+}
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+alias gitignore="echo $1 >> .gitignore"
+alias "cd.."="cd .."
+
+export DISPLAY=:0
+alias cb=clipboard
+
+fortune brasil
+
+# vi:ft=sh
