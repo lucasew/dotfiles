@@ -70,7 +70,6 @@ set path=%BINDIR%cmake;%path%
 set path=%BINDIR%Fritzing;%path%
 set path=%BINDIR%curl\bin;%path%
 set path=%BINDIR%ffmpeg\bin;%path%
-set path=%BINDIR%flutter\bin;%path%
 set path=%BINDIR%gcc\bin;%path%
 set path=%BINDIR%git\bin;%path%
 set path=%BINDIR%graphviz\bin;%path%
@@ -91,7 +90,13 @@ set path=%BINDIR%wxMEdit;%path%
 set path=%BINDIR%tar\bin;%path%
 set path=%BINDIR%ImgBurn;%path%
 set path=%BINDIR%PCSX2;%path%
+set path=%BINDIR%v;%path%
 set path=%BINDIR%docker;%path%
+set path=%BINDIR%ipmiutil;%path%
+
+rem -- flutter
+set ENABLE_FLUTTER_DESKTOP=true
+set path=%BINDIR%flutter\bin;%path%
 
 rem -- sbcl
 set path=%BINDIR%sbcl2;%path%

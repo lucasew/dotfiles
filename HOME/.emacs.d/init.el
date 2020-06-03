@@ -77,6 +77,11 @@
   :config
   (add-hook 'after-init-hook #'lsp-deferred))
 
+(use-package go-mode
+  :ensure t
+  :config
+  (add-hook 'go-mode-hook 'lsp-deferred))
+
 (use-package company-quickhelp 
   :ensure t
   :after company)
@@ -191,4 +196,5 @@
 (use-package fzf
   :ensure t)
 
-
+(use-package magit
+  :ensure t)
