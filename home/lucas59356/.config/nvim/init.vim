@@ -275,7 +275,7 @@ if executable('arduino')
     endfunction
     Plug 'stevearc/vim-arduino'
     let g:arduino_dir = '/usr/share/arduino'
-    let g:lightline.component.arduino = '%{ArduinoStatusLine()}'
+    " let g:lightline.component.arduino = '%{ArduinoStatusLine()}'
     autocmd BufNewFile,BufRead *.ino call add(g:lightline.active.left[1], 'arduino')
 endif
 

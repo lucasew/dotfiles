@@ -2,7 +2,8 @@
  * Author: Primetoxinz
  */
 * {
-    text-color:                  #f2f2f2;
+    text-color:                  #000000;
+    /* text-color:                  #f2f2f2; */
     /* background-color:            #4e474333; */
     background-color: #ffffff00;
     foreground: #ffffff88;
@@ -37,10 +38,9 @@
 }
 #window {
     border:     0;
-    text-color: @foreground;
+    text-color: @text-color;
     background-color: rgba ( 0, 0, 0, 0 % );
     padding:    0;
-    text-color: @bordercolor;
     background-color: @background;
 }
 #mainbox {
@@ -49,23 +49,24 @@
 }
 #message {
     border:     1px dash 0px 0px ;
-    text-color: @separatorcolor;
+    /* text-color: @separatorcolor; */
+    text-color: @text-color;
     padding:    2px 0px 0px ;
 }
 #textbox {
-    text-color: @foreground;
+    text-color: @text-color;
 }
 #listview {
     fixed-height: 0;
     border:       2px 0px 0px ;
     padding:      2px 0px 0px ;
-    text-color: @separatorcolor;
+    text-color: @text-color;
 }
 #element {
     border: 0;
 }
 #element.normal.normal {
-    text-color: @normal-foreground;
+    text-color: @text-color;
     background-color: @normal-background;
 }
 #element.normal.urgent {
@@ -89,7 +90,7 @@
     background-color: @selected-active-background;
 }
 #element.alternate.normal {
-    text-color: @alternate-normal-foreground;
+    text-color: @text-color;
     background-color: @alternate-normal-background;
 }
 #element.alternate.urgent {
@@ -122,7 +123,7 @@
     expand:     false;
     str:        ":";
     margin:     0px 0.3em 0em 0em ;
-    text-color: @normal-foreground;
+    text-color: @text-color;
 }
 
 window {

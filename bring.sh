@@ -1,9 +1,9 @@
 function bring() {
-    srcdir=$(dirname $1)
+    srcdir="$(dirname $1)"
     destdir=".$srcdir"
     srcfile=$1
-    mkdir -p $destdir
-    cp $srcfile $destdir -r && echo "Copiado $srcfile para $destdir"
+    mkdir -p "$destdir"
+    cp "$srcfile" "$destdir" -r && echo "Copiado $srcfile para $destdir"
 }
 
 # bring /etc/systemd/system/screenlock.service
@@ -23,5 +23,6 @@ bring ~/.config/rofi
 bring ~/.tmux.conf
 bring ~/.zshrc
 bring ~/environment
+bring ~/.PlayOnLinux/wineprefix/liberar_barra.sh
 
 pacman -Qe > pacman-explicit.txt

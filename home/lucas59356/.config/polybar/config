@@ -99,7 +99,7 @@ font-1 = unifont:size=10:heavy:fontformat=truetype;0
 font-2 = siji:pixelsize=10;1
 
 modules-left = i3 xwindow
-modules-center = pulseaudio xkeyboard memory cpu netusage wlan eth temperature battery date 
+modules-center = xkeyboard memory cpu wifiusage cabousage net_test wlan eth temperature battery date 
 modules-right = 
 
 tray-position = right
@@ -274,7 +274,7 @@ format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #4bffdc
 label =  %percentage_used%%
 
-[module/netusage]
+[module/wifiusage]
 type = internal/network
 interface = wlp3s0
 interval = 1.0
@@ -283,10 +283,20 @@ label-disconnected =
 format-connected-underline = #00ff00
 format-disconnected-underline = #ff0000
 
+[module/cabousage]
+type = internal/network
+interface = enp2s0f1
+interval = 1.0
+label-connected = ↓ %downspeed% ↑ %upspeed%
+label-disconnected = 
+format-connected-underline = #00ff00
+format-disconnected-underline = #ff0000
+
+
 [module/net_test]
 type = custom/script
 host = google.com
-exec = ping google.com -c 1 > /dev/null 2> /dev/null || echo INTERNETLESS && echo
+exec = ping google.com -c 1 > /dev/null 2> /dev/null || echo OFFLINE && echo
 interval = 1
 label = %output%
 format-underline = #ff0000
