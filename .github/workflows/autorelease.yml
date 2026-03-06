@@ -19,6 +19,7 @@ jobs:
       - run: mise run codegen
       - name: Create Pull Request if Codegen modified files
         id: cpr
+        if: github.event_name != 'pull_request'
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -27,7 +28,7 @@ jobs:
           body: "Auto-generated PR for codegen changes."
           branch: "chore/codegen-update"
       - name: Fail if codegen caused changes
-        if: steps.cpr.outputs.pull-request-number != ''
+        if: github.event_name != 'pull_request' && steps.cpr.outputs.pull-request-number != ''
         run: |
           echo "Codegen caused changes. A PR has been created: ${{ steps.cpr.outputs.pull-request-url }}"
           exit 1
