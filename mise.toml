@@ -1,0 +1,38 @@
+[tools]
+"github:lucasew/workspaced" = "0.2.1"
+
+[tasks.lint]
+description = "Run workspaced linter"
+run = "workspaced codebase lint"
+
+[tasks.fmt]
+description = "Run workspaced formatter"
+run = "workspaced codebase format"
+
+[tasks.test]
+description = "Run tests"
+depends = ["test:*"]
+
+[tasks."test:dummy"]
+run = "echo 'No tests defined yet'"
+hide = true
+
+[tasks.codegen]
+description = "Update generated code"
+depends = ["codegen:*"]
+
+[tasks."codegen:dummy"]
+run = "echo 'No codegen defined yet'"
+hide = true
+
+[tasks.install]
+description = "Install dependencies"
+depends = ["install:*"]
+
+[tasks."install:dummy"]
+run = "echo 'No install steps defined yet'"
+hide = true
+
+[tasks.ci]
+description = "Run CI pipeline"
+depends = ["lint", "test"]

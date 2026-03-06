@@ -1,0 +1,45 @@
+name: Autorelease
+on:
+  push:
+    branches: [main, master]
+    tags: ["*"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  autorelease:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jdx/mise-action@v2
+      - run: mise run install
+      - run: mise run codegen
+      - name: Create Pull Request if Codegen modified files
+        id: cpr
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: update codegen artifacts"
+          title: "chore: update codegen artifacts"
+          body: "Auto-generated PR for codegen changes."
+          branch: "chore/codegen-update"
+      - name: Fail if codegen caused changes
+        if: steps.cpr.outputs.pull-request-number != ''
+        run: |
+          echo "Codegen caused changes. A PR has been created: ${{ steps.cpr.outputs.pull-request-url }}"
+          exit 1
+      - run: mise run ci
+      - name: Release
+        if: github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/')
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release create ${{ github.ref_name }} --generate-notes
+      - name: Upload Artifacts
+        if: github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/')
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifacts
+          path: .
