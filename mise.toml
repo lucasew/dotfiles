@@ -1,0 +1,6 @@
+[tools]
+shellcheck = "0.10.0"
+
+[tasks]
+"ci" = { depends = ["ci:*"] }
+"ci:shellcheck" = "shellcheck -e SC1091 -e SC2168 bring.sh usr/bin/projetor usr/bin/xlock home/lucas59356/.PlayOnLinux/wineprefix/liberar_barra.sh lib/error_reporting.sh"

@@ -1,3 +1,26 @@
 #!/usr/bin/env bash
-xrandr --output HDMI-1 --off
-xrandr --output HDMI-1 --auto
+
+# Find repo root to source lib
+SCRIPT_DIR="$(dirname "$(realpath "$0")")"
+# Try to find lib relative to this script's position in the repo
+if [ -f "$SCRIPT_DIR/../../lib/error_reporting.sh" ]; then
+    source "$SCRIPT_DIR/../../lib/error_reporting.sh"
+else
+    # Fallback inline if deployed directly to /usr/bin
+    report_error() {
+        local exit_code=$1
+        local context=$2
+        if [ "$exit_code" -ne 0 ]; then
+            echo "[ERROR] $context (Exit code: $exit_code)" >&2
+        fi
+        return "$exit_code"
+    }
+fi
+
+DISPLAY_OUTPUT="HDMI-1"
+
+xrandr --output "$DISPLAY_OUTPUT" --off
+report_error $? "Failed to turn off $DISPLAY_OUTPUT"
+
+xrandr --output "$DISPLAY_OUTPUT" --auto
+report_error $? "Failed to set $DISPLAY_OUTPUT to auto"

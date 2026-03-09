@@ -1,3 +1,23 @@
 #! /usr/bin/env sh
+
+# Find repo root to source lib
+SCRIPT_DIR="$(dirname "$(realpath "$0")")"
+if [ -f "$SCRIPT_DIR/../../lib/error_reporting.sh" ]; then
+    . "$SCRIPT_DIR/../../lib/error_reporting.sh"
+else
+    # Fallback inline if deployed directly
+    report_error() {
+        exit_code=$1
+        context=$2
+        if [ "$exit_code" -ne 0 ]; then
+            echo "[ERROR] $context (Exit code: $exit_code)" >&2
+        fi
+        return "$exit_code"
+    }
+fi
+
 xset dpms force off
+report_error $? "Failed to force DPMS off"
+
 betterlockscreen -l -t "$(whoami)" &
+report_error $? "Failed to execute betterlockscreen"
