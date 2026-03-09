@@ -1,0 +1,33 @@
+name: ciborg
+
+on: [push, pull_request]
+
+jobs:
+  ciborg:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install
+        uses: jdx/mise-action@v2
+
+      - name: Codegen
+        run: mise run codegen
+
+      - name: PR if Difference
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Differences found after codegen, creating PR..."
+          fi
+
+      - name: CI
+        run: mise run ci
+
+      - name: Release
+        if: github.ref == 'refs/heads/main'
+        run: echo "Releasing..."
+
+      - name: Artifacts
+        if: always()
+        run: echo "Uploading artifacts..."
