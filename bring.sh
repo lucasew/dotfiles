@@ -1,9 +1,12 @@
+#!/usr/bin/env bash
+source lib/error_reporting.sh || true
+
 function bring() {
-    srcdir="$(dirname $1)"
+    srcdir="$(dirname "$1")"
     destdir=".$srcdir"
-    srcfile=$1
-    mkdir -p "$destdir"
-    cp "$srcfile" "$destdir" -r && echo "Copiado $srcfile para $destdir"
+    srcfile="$1"
+    mkdir -p "$destdir" || { report_error "Failed to create directory $destdir"; return 1; }
+    cp "$srcfile" "$destdir" -r && echo "Copiado $srcfile para $destdir" || { report_error "Failed to copy $srcfile to $destdir"; return 1; }
 }
 
 # bring /etc/systemd/system/screenlock.service
@@ -25,4 +28,4 @@ bring ~/.zshrc
 bring ~/environment
 bring ~/.PlayOnLinux/wineprefix/liberar_barra.sh
 
-pacman -Qe > pacman-explicit.txt
+pacman -Qe > pacman-explicit.txt || report_error "Failed to execute pacman -Qe"

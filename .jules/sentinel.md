@@ -1,0 +1,1 @@
+- 2024-03-18: [Medium] Swallowed errors in bash scripts mask underlying failures.
