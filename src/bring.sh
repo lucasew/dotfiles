@@ -1,9 +1,14 @@
+#!/usr/bin/env bash
+
+# shellcheck source=src/lib/error_reporting.sh
+source "$(dirname "${BASH_SOURCE[0]}")/lib/error_reporting.sh" || exit 1
+# shellcheck source=src/lib/bring_core.sh
+source "$(dirname "${BASH_SOURCE[0]}")/lib/bring_core.sh" || { report_error "Failed to source bring_core.sh"; exit 1; }
+
+PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
 function bring() {
-    srcdir="$(dirname $1)"
-    destdir=".$srcdir"
-    srcfile=$1
-    mkdir -p "$destdir"
-    cp "$srcfile" "$destdir" -r && echo "Copiado $srcfile para $destdir"
+    bring_file "$1" "$PROJECT_ROOT/src" || report_error "Failed to bring $1"
 }
 
 # bring /etc/systemd/system/screenlock.service
@@ -25,4 +30,4 @@ bring ~/.zshrc
 bring ~/environment
 bring ~/.PlayOnLinux/wineprefix/liberar_barra.sh
 
-pacman -Qe > pacman-explicit.txt
+pacman -Qe > "$PROJECT_ROOT/pacman-explicit.txt" || report_error "Failed to generate pacman-explicit.txt"

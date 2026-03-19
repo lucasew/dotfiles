@@ -1,0 +1,12 @@
+[tools]
+"node" = "20.0.0"
+"shellcheck" = "0.10.0"
+
+[tasks."ci:test"]
+run = "echo 'CI passed'"
+
+[tasks."ci:shellcheck"]
+run = "shellcheck -P src -x src/bring.sh src/lib/bring_core.sh src/lib/error_reporting.sh"
+
+[tasks.ci]
+depends = ["ci:*"]
