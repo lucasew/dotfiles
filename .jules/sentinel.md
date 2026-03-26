@@ -1,0 +1,1 @@
+- 2026-03-26: [Avoid using sudo in desktop environment configurations like polybar for basic power management commands; prefer systemctl which doesn't require elevated privileges]
