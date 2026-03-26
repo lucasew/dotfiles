@@ -1,7 +1,9 @@
+#!/usr/bin/env bash
+
 function bring() {
-    srcdir="$(dirname $1)"
+    srcdir="$(dirname "$1")"
     destdir=".$srcdir"
-    srcfile=$1
+    srcfile="$1"
     mkdir -p "$destdir"
     cp "$srcfile" "$destdir" -r && echo "Copiado $srcfile para $destdir"
 }

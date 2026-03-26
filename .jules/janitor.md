@@ -1,0 +1,1 @@
+- 2026-03-26: Always use shebangs and quote variable expansions in shell scripts to prevent word splitting and execution errors.
