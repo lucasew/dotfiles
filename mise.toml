@@ -1,0 +1,10 @@
+[tools]
+shellcheck = "0.11.0"
+shfmt = "3.10.0"
+
+[tasks."lint:sh"]
+run = "shellcheck src/bring.sh src/lib/error_reporting.sh && shfmt -d src/bring.sh src/lib/error_reporting.sh"
+
+[tasks.ci]
+depends = ["lint:*"]
+run = "echo 'CI passed'"
